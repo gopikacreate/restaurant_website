@@ -12,7 +12,7 @@ export const menuItems = [
     description: "Creamy burrata, heirloom tomatoes, basil oil.", // short description
     price: 9, // number in pounds (formatted with £ in the component)
     category: "Starters", // must match a name in the categories list above
-    image: "https://picsum.photos/seed/burrata/160/160", // placeholder photo
+    image: "images/tomato.jpg", // placeholder photo
     alt: "Burrata with tomatoes", // describes the photo for screen readers
   },
   {
@@ -21,7 +21,7 @@ export const menuItems = [
     description: "Crisp saffron rice balls filled with mozzarella.",
     price: 7,
     category: "Starters",
-    image: "https://picsum.photos/seed/arancini/160/160",
+    image: "images/images.jpeg",
     alt: "Arancini rice balls",
   },
   {
@@ -30,7 +30,7 @@ export const menuItems = [
     description: "Baked each morning, with rosemary and sea salt.",
     price: 5,
     category: "Starters",
-    image: "https://picsum.photos/seed/focaccia/160/160",
+    image: "images/Focaccia & olives.jpeg",
     alt: "Focaccia with olives",
   },
   {
@@ -39,7 +39,7 @@ export const menuItems = [
     description: "Slow-cooked beef and pork ragù, parmesan.",
     price: 16,
     category: "Mains",
-    image: "https://picsum.photos/seed/tagliatelle/160/160",
+    image: "images/Tagliatelle.jpg",
     alt: "Tagliatelle with ragù",
   },
   {
@@ -48,7 +48,7 @@ export const menuItems = [
     description: "Potato gnocchi, basil pesto, toasted pine nuts.",
     price: 14,
     category: "Mains",
-    image: "https://picsum.photos/seed/gnocchi/160/160",
+    image: "images/Pesto gnocchi.jpg",
     alt: "Pesto gnocchi",
   },
   {
@@ -57,7 +57,7 @@ export const menuItems = [
     description: "Golden breaded chicken, rocket and lemon.",
     price: 18,
     category: "Mains",
-    image: "https://picsum.photos/seed/chicken/160/160",
+    image: "images/Chicken milanese.jpg",
     alt: "Chicken milanese",
   },
   {
@@ -66,7 +66,7 @@ export const menuItems = [
     description: "Espresso-soaked sponge, mascarpone, cocoa.",
     price: 7,
     category: "Desserts",
-    image: "https://picsum.photos/seed/tiramisu/160/160",
+    image: "images/Tiramisù.jpg",
     alt: "Tiramisù",
   },
   {
@@ -75,7 +75,7 @@ export const menuItems = [
     description: "Vanilla cream with a berry compote.",
     price: 6,
     category: "Desserts",
-    image: "https://picsum.photos/seed/pannacotta/160/160",
+    image: "images/Panna cotta.jpg",
     alt: "Panna cotta with berries",
   },
   {
@@ -84,7 +84,7 @@ export const menuItems = [
     description: "Vanilla gelato drowned in hot espresso.",
     price: 6,
     category: "Desserts",
-    image: "https://picsum.photos/seed/gelato/160/160",
+    image: "images/Affogato.jpg",
     alt: "Affogato with gelato",
   },
 ];
