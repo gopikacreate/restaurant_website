@@ -1,16 +1,30 @@
-# React + Vite
+# Caffè Marlena
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A single-page restaurant website rebuilt with React and Tailwind CSS. It started as a plain HTML and CSS project.
 
-Currently, two official plugins are available:
+## Run it
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+    npm install
+    npm run dev
 
-## React Compiler
+## Built with
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Vite + React (JavaScript)
+- Tailwind CSS v4
 
-## Expanding the ESLint configuration
+## Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `src/components/` Header, Hero, Menu, MenuItem, FavouriteToggle, About, Reservation, Footer
+- `src/data/menu.js` all menu items in one array
+- `src/index.css` Tailwind import and theme (colours, fonts, animations)
+
+## Features
+
+- Menu filter by course (All, Starters, Mains, Desserts) using `useState`
+- Favourite toggle on every dish, a controlled component reused per item
+- Mobile-first responsive layout with no horizontal scroll
+- Reservation form with a thank-you message
+
+## Note
+
+The reservation form does not send data anywhere, and the restaurant details and photos are placeholders.
