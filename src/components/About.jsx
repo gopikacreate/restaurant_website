@@ -10,7 +10,7 @@ function About() {
       <div className="relative grid min-h-40 place-items-center overflow-hidden bg-forest-soft md:min-h-72">
         {/* Placeholder photo. alt="" because it is decoration */}
         <img
-          src="https://picsum.photos/seed/kitchen/900/700"
+          src="images/cafe.jpg"
           alt=""
           className="absolute inset-0 h-full w-full object-cover"
         />

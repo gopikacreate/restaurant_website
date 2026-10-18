@@ -29,7 +29,7 @@ function Menu() {
       <p className="mb-6 max-w-xl">Cooked fresh each day. Ask us about allergens.</p>
 
       {/* Filter buttons, one per entry in the categories array. flex-wrap stops them overflowing on phones */}
-      <div className="mb-3 flex flex-wrap gap-2" role="group" aria-label="Filter menu by course">
+      {/* <div className="mb-3 flex flex-wrap gap-2" role="group" aria-label="Filter menu by course">
         {categories.map((category) => (
           <button
             key={category}
@@ -45,7 +45,7 @@ function Menu() {
             {category}
           </button>
         ))}
-      </div>
+      </div> */}
 
       {/* Count of favourites. aria-live announces changes to screen readers */}
      {/* Toolbar: filter buttons on the left, saved badge on the right.
