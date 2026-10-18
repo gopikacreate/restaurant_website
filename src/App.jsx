@@ -1,15 +1,20 @@
 // src/App.jsx
-// The page is built from components. More will be added between Header and Footer.
 import Header from "./components/Header";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Reservation from "./components/Reservation";
 import Footer from "./components/Footer";
 
 function App() {
   return (
     <>
       <Header />
-      {/* Temporary placeholder so you can see the header and footer; replaced in the next steps */}
-      <main id="top" className="mx-auto min-h-[60vh] max-w-[70rem] px-5 py-16">
-        <h1 className="font-display text-4xl text-forest">Main content coming next</h1>
+      {/* id="top" is the target of the logo link */}
+      <main id="top">
+        <Hero />
+        {/* Menu goes here in the next step */}
+        <About />
+        <Reservation />
       </main>
       <Footer />
     </>
