@@ -1,26 +1,52 @@
-@import "tailwindcss";
+@import "tailwindcss"; /* loads Tailwind */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Colours: these become bg-forest, text-butter, border-plum and so on */
+  --color-forest: #14342c;
+  --color-forest-soft: #1f4a3f;
+  --color-butter: #f4d35e;
+  --color-mist: #eef2ec;
+  --color-plum: #5b2a3c;
+  --color-ink: #1b2623;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Animations: animate-rise, animate-steam, animate-float */
+  --animate-rise: rise 0.9s ease-out both;
+  --animate-steam: steam 3s ease-in-out infinite;
+  --animate-float: float 4s ease-in-out infinite;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes steam {
+    0% { opacity: 0; transform: translateY(20px) scaleX(1); }
+    40% { opacity: 0.5; }
+    100% { opacity: 0; transform: translateY(-20px) scaleX(2); }
+  }
+  @keyframes float {
+    50% { transform: translateY(-10px); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Fonts: "inline" because the values come from CSS variables that next/font creates in layout.js */
+@theme inline {
+  --font-display: var(--font-young-serif), Georgia, serif;
+  --font-body: var(--font-figtree), system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+  }
+  body {
+    font-family: var(--font-figtree), system-ui, sans-serif;
+    background-color: var(--color-mist);
+    color: var(--color-ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-young-serif), Georgia, serif;
+  }
 }
