@@ -68,3 +68,31 @@ export const verification = pgTable("verification", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
+
+// ---------- Orders (Stripe payments) ----------
+
+// One row per purchase attempt
+export const orders = pgTable("orders", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }), // every order belongs to a real signed-in user
+  status: text("status").notNull().default("pending"), // "pending" until the webhook says "paid"
+  totalAmount: integer("total_amount").notNull(), // total in pence, calculated on the server
+  currency: text("currency").notNull().default("gbp"),
+  stripeSessionId: text("stripe_session_id").unique(), // links this order to its Stripe Checkout Session
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  paidAt: timestamp("paid_at"), // filled in by the webhook
+});
+
+// What was bought in each order, and at what price
+export const orderItems = pgTable("order_items", {
+  id: serial("id").primaryKey(),
+  orderId: integer("order_id")
+    .notNull()
+    .references(() => orders.id, { onDelete: "cascade" }), // deleted with its order
+  menuItemId: integer("menu_item_id").references(() => menuItems.id, { onDelete: "set null" }), // which dish (kept even if the dish is later removed)
+  name: text("name").notNull(), // dish name copied at purchase time
+  unitAmount: integer("unit_amount").notNull(), // price per portion in pence at purchase time
+  quantity: integer("quantity").notNull().default(1),
+});
