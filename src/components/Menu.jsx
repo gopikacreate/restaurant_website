@@ -5,6 +5,7 @@
 import { useState, useEffect } from "react";
 import { categories } from "../data/menu"; // only the filter button names still come from here
 import MenuItem from "./MenuItem";
+import CartSummary from "./CartSummary";
 
 function Menu() {
   // The dishes from the database. Starts empty until the fetch finishes
@@ -18,6 +19,8 @@ function Menu() {
   const [activeCategory, setActiveCategory] = useState("All");
   // Ids of dishes the visitor has hearted
   const [favourites, setFavourites] = useState([]);
+  // What the visitor wants to order: { dishId: quantity }
+  const [cart, setCart] = useState({});
 
   // useEffect with [] runs once, right after the first render: it calls our API
   useEffect(() => {
@@ -39,22 +42,43 @@ function Menu() {
   // Adds the id if it's missing, removes it if it's there
   function toggleFavourite(id) {
     setFavourites((current) =>
-      current.includes(id) ? current.filter((favId) => favId !== id) : [...current, id]
+      current.includes(id)
+        ? current.filter((favId) => favId !== id)
+        : [...current, id],
     );
+  }
+  // Sets how many of one dish are in the cart (0 removes it, 10 is the maximum)
+  function setQuantity(id, quantity) {
+    setCart((current) => {
+      const next = { ...current };
+      if (quantity <= 0) delete next[id];
+      else next[id] = Math.min(quantity, 10);
+      return next;
+    });
   }
 
   // THE FILTER: now filters the dishes that came from the database
   const visibleItems =
-    activeCategory === "All" ? items : items.filter((item) => item.category === activeCategory);
+    activeCategory === "All"
+      ? items
+      : items.filter((item) => item.category === activeCategory);
 
   return (
     <section id="menu" className="mx-auto max-w-[70rem] px-5 py-12 md:py-16">
-      <h2 className="mb-2 font-display text-3xl text-forest sm:text-4xl">The menu</h2>
-      <p className="mb-6 max-w-xl">Cooked fresh each day. Ask us about allergens.</p>
+      <h2 className="mb-2 font-display text-3xl text-forest sm:text-4xl">
+        The menu
+      </h2>
+      <p className="mb-6 max-w-xl">
+        Cooked fresh each day. Ask us about allergens.
+      </p>
 
       {/* Toolbar: filter buttons on the left, saved badge on the right */}
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter menu by course">
+        <div
+          className="flex flex-wrap gap-2"
+          role="group"
+          aria-label="Filter menu by course"
+        >
           {categories.map((category) => (
             <button
               key={category}
@@ -75,7 +99,9 @@ function Menu() {
         <p
           aria-live="polite"
           className={`inline-flex items-center gap-2 self-start rounded-full px-4 py-2 text-sm font-semibold transition ${
-            favourites.length === 0 ? "bg-white text-ink/60" : "bg-plum text-mist"
+            favourites.length === 0
+              ? "bg-white text-ink/60"
+              : "bg-plum text-mist"
           }`}
         >
           <svg
@@ -88,7 +114,9 @@ function Menu() {
           >
             <path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.5 3 5 6.4 5c2 0 3.7 1.1 5.6 3.2C13.9 6.1 15.6 5 17.6 5 21 5 22.8 8.5 21.5 11.8 19.5 16.4 12 21 12 21z" />
           </svg>
-          {favourites.length === 0 ? "No favourites yet" : `${favourites.length} saved`}
+          {favourites.length === 0
+            ? "No favourites yet"
+            : `${favourites.length} saved`}
         </p>
       </div>
 
@@ -107,10 +135,14 @@ function Menu() {
               item={item}
               isFavourite={favourites.includes(item.id)}
               onToggleFavourite={() => toggleFavourite(item.id)}
+              quantity={cart[item.id] || 0}
+              onQuantityChange={(quantity) => setQuantity(item.id, quantity)}
             />
           ))}
         </ul>
       )}
+      {/* The cart uses ALL dishes (items), so it still shows dishes hidden by the current filter */}
+<CartSummary items={items} cart={cart} onChange={setQuantity} />
     </section>
   );
 }
