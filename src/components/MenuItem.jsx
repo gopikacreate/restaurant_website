@@ -1,6 +1,7 @@
 // src/components/MenuItem.jsx
 // One dish. It only displays what it is given (props), so one component serves all 9 dishes.
 import FavouriteToggle from "./FavouriteToggle";
+import OrderButton from "./OrderButton";
 
 // Top border colour per category, same look as the old course cards
 const borderColours = {
@@ -28,6 +29,7 @@ function MenuItem({ item, isFavourite, onToggleFavourite }) {
         <h3 className="font-display text-lg leading-snug">{item.name}</h3>
         <p className="text-sm text-ink/70">{item.description}</p>
         <p className="mt-1 font-semibold text-plum">£{item.price}</p>
+        <OrderButton menuItemId={item.id} dishName={item.name} />
       </div>
 
       {/* The reusable toggle: value and function both come from the parent */}
