@@ -34,6 +34,8 @@ export async function POST(request) {
         .from(orders)
         .where(and(eq(orders.id, orderId), eq(orders.stripeSessionId, session.id)));
 
+        console.log("webhook check:", { orderId, found: Boolean(order), status: order?.status, charged: session.amount_total, expected: order?.totalAmount });
+
       // Mark it paid only if the order exists and Stripe charged exactly what we expected
       if (order && order.status !== "paid" && session.amount_total === order.totalAmount) {
         await db.update(orders).set({ status: "paid", paidAt: new Date() }).where(eq(orders.id, order.id));
