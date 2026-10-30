@@ -1,6 +1,7 @@
 // src/db/schema.js
 // Describes our database tables. Drizzle turns this into real Postgres tables.
-import { pgTable, serial, text, integer, boolean, timestamp } from "drizzle-orm/pg-core";
+
+import { pgTable, serial, text, integer, boolean, timestamp, date, time } from "drizzle-orm/pg-core";
 
 // ---------- Our own table: the menu ----------
 export const menuItems = pgTable("menu_items", {
@@ -95,4 +96,21 @@ export const orderItems = pgTable("order_items", {
   name: text("name").notNull(), // dish name copied at purchase time
   unitAmount: integer("unit_amount").notNull(), // price per portion in pence at purchase time
   quantity: integer("quantity").notNull().default(1),
+});
+
+// ---------- Reservations ----------
+
+// One row per table booking
+export const reservations = pgTable("reservations", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }), // who made the booking
+  name: text("name").notNull(), // name the table is booked under
+  email: text("email").notNull(), // where we send the confirmation
+  date: date("date", { mode: "string" }).notNull(), // e.g. "2026-11-14"
+  time: time("time").notNull(), // e.g. "19:30"
+  guests: integer("guests").notNull(), // party size, 1 to 12
+  status: text("status").notNull().default("booked"), // "booked" for now; could become "cancelled" later
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });

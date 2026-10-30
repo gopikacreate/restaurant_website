@@ -21,5 +21,5 @@ export function proxy(request) {
 
 // Only these paths are checked. The Stripe webhook is deliberately NOT listed, because Stripe is not a signed-in user.
 export const config = {
-  matcher: ["/api/checkout", "/api/orders/:path*", "/order/:path*"],
+ matcher: ["/api/checkout", "/api/reservations", "/api/orders/:path*", "/order/:path*"],
 };
